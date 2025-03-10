@@ -1,4 +1,4 @@
-- name: payment-component
+- name: install payment component
   hosts: payment
   become: 'yes'
   tasks:
@@ -51,8 +51,8 @@
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-    - name: start payment
+    - name: restart payment
       ansible.builtin.service:
         name: payment
-        state: started
+        state: restarted
         enabled: 'yes'

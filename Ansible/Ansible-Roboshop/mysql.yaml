@@ -1,4 +1,4 @@
-- name: mysql-component
+- name: install mysql component
   hosts: mysql
   become: 'yes'
   tasks:
@@ -19,5 +19,4 @@
         enabled: 'yes'
     - name: default root password
       ansible.builtin.command: mysql_secure_installation --set-root-pass RoboShop@1
-    - name: new password
-      ansible.builtin.command: mysql -uroot -pRoboShop@1
+    

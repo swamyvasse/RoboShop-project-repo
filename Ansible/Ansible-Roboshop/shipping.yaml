@@ -1,4 +1,4 @@
-- name: shipping-component
+- name: install shipping component
   hosts: shipping
   become: 'yes'
   tasks:
@@ -51,11 +51,6 @@
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-    - name: start shipping
-      ansible.builtin.service:
-        name: shipping
-        state: started
-        enabled: 'yes'
     - name: install mysql
       ansible.builtin.yum:
         name: mysql
@@ -68,3 +63,4 @@
       ansible.builtin.service:
         name: shipping
         state: restarted
+        enabled: 'yes'

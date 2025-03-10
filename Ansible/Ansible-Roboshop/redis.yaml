@@ -1,4 +1,4 @@
-- name: redis-component
+- name: install redis component
   hosts: redis
   become: 'yes'
   tasks:
@@ -17,8 +17,8 @@
         path: /etc/redis.conf
         regexp: 127.0.0.1
         replace: 0.0.0.0
-    - name: start redis
+    - name: restart redis
       ansible.builtin.service:
         name: redis
-        state: started
-        enabled: 'yes'
+        state: restarted
+        enabled: true

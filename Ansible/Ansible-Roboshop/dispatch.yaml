@@ -1,4 +1,4 @@
-- name: dispatch-component
+- name: install dispatch component
   hosts: dispatch
   become: 'yes'
   tasks:
@@ -51,8 +51,8 @@
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-    - name: start dispatch
+    - name: restart dispatch
       ansible.builtin.service:
         name: dispatch
-        state: started
+        state: restarted
         enabled: 'yes'

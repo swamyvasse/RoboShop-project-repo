@@ -1,4 +1,4 @@
-- name: catalogue-component
+- name: install catalogue component
   hosts: catalogue
   become: 'yes'
   tasks:
@@ -49,18 +49,18 @@
     - name: daemon-reload
       ansible.builtin.systemd:
         daemon-reload: true
-    - name: start catalogue
-      ansible.builtin.service:
-        name: catalogue
-        state: started
-        enabled: 'yes'
     - name: copy file mongo.repo
       ansible.builtin.copy:
         src: mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
-    - name: install mongodb-org-shell
+    - name: install mongodb
       ansible.builtin.yum:
         name: mongodb-org-shell
         state: installed
-    - name: Load Schema
+    - name: Load catalogue data
       ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS < /app/schema/catalogue.js
+    - name: restart catalogue
+      ansible.builtin.service:
+        name: catalogue
+        state: restarted
+        enabled: true
